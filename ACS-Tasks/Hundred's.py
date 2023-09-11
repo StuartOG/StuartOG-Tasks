@@ -2,5 +2,6 @@
 n=int(input("Give an integer between 100 and 999: "))
 s = str(n)
 for i in s:
-    print(i)
+     print(i)
+
 
