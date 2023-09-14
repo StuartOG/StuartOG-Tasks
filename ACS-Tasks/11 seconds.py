@@ -1,4 +1,4 @@
-input = (input("Enter a time")) #input a time for the user
+input = (input("Enter a time: ")) #input a time for the user
 times = input.split(":") #separates the hours minutes and seconds
 
 if len(times) != 3:
