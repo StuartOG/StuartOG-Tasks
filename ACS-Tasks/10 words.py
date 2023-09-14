@@ -1,5 +1,5 @@
-sentence = input("Write a sentence: ")  
+sentence = input("Write a sentence: ")  #inputs a sentence
 
-word = sentence.split()
+word = sentence.split() #splits the sentence into the separate words
 
-print("Number of words: ", len(word))
+print("Number of words: ", len(word)) #displays the length of the sentence
