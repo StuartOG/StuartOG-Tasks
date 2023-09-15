@@ -1,6 +1,4 @@
 
-
-
 def caeser_cypher(sentence, shift):
     cypher = ""
 
@@ -8,7 +6,7 @@ def caeser_cypher(sentence, shift):
     for char in sentence:
         if char.isalpha():
         
-            char_shift = chr((ord(char.lower) - ord('a') + shift % 26) + ord('a'))
+            char_shift = chr((ord(char) - ord('a') + shift % 26) + ord('a'))
             cypher += char_shift
         
         else:
