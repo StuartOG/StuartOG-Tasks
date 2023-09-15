@@ -4,6 +4,9 @@ Number = random.randint(0,3)
 
 Player_Choice = input("Choose rock, paper or scissors: ")
 
+if Player_Choice != "rock" or Player_Choice != "paper" or Player_Choice != "scissors":
+    print("Invalid action")
+
 if Number == 1:
     print("The computer chose rock")
 elif Number == 2:
