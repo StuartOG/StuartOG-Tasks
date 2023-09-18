@@ -1,4 +1,4 @@
-import random, os
+import random
 
 Number = random.randint(0,3)
 
