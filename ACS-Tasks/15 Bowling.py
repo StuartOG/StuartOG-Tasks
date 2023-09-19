@@ -19,18 +19,18 @@ def calculate_score(rolls):
 
 def bowling():
     rolls = []
-    go = 1
+    counter = 1
 
-    while go <= 10:
-        print(f"Go {go}")
-        roll1 = int(input("Enter the number of pins knocked down in the first go: "))
+    while counter <= 10:
+        print(f"Go {counter}")
+        roll1 = int(input("How many pins were knocked down in the first bowl: "))
 
         if roll1 == 10:  # Strike
             rolls.append(roll1)
-            go += 1
+            counter += 1
             continue
 
-        roll2 = int(input("Enter the number of pins knocked down in the second go: "))
+        roll2 = int(input("How many pins were knocked down in the second bowl: "))
 
         if roll1 + roll2 > 10:
             print("Invalid input")
@@ -38,7 +38,7 @@ def bowling():
 
         rolls.append(roll1)
         rolls.append(roll2)
-        go += 1
+        counter += 1
 
     score = calculate_score(rolls)
     print(f"\nYour final score is: {score}")
