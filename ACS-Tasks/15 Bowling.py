@@ -1,6 +1,7 @@
 bowling_score = []
 
 def bowling():
+    turns = 0
     while turns < 10:
         score = int(input("Input your first score"))
         if score == 10:
