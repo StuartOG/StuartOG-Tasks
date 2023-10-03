@@ -1,5 +1,6 @@
 # Import a library of functions called 'pygame'
 import pygame
+import math
 
 # Initialize the game engine
 pygame.init()
@@ -24,9 +25,12 @@ clock = pygame.time.Clock()
  
 #Global variables
 x_val = 50
-y_val = 50
+y_val = 175
 radius = 25
+x = 1
 x_offset = 1
+y_offset = 1
+pi = 3.141592652
 
 # -------- Main Program Loop -----------
 while not done:
@@ -36,15 +40,24 @@ while not done:
             done = True # Flag that we are done so we exit this loop
  
     # --- Game logic should go here
-    x_val = x_val + x_offset
-    if x_val = 
-    # --- Drawing code should go here
+    if x_val > 0:
+        x_val = x_val + x_offset
+    if y_val == 0:
+        y_val = y_val + 1*y_offset
+    else:
+        y_val = y_val + -1*y_offset
+    if x_val == 900:
+        x_val = 0
     
  
     # First, clear the screen to white. Don't put other drawing commands
     # above this, or they will be erased with this command.
     screen.fill(BLUE)
-    
+
+    pygame.draw.arc(screen, YELLOW, [-50, 100, 900, 300], 2*pi, pi, 5)
+    pygame.draw.arc(screen, RED, [-50, 95, 900, 300], 2*pi, pi, 5)
+    pygame.draw.arc(screen, GREEN, [-50, 105, 900, 300], 2*pi, pi, 5)
+    pygame.draw.arc(screen, BLUE, [-50, 110, 900, 300], 2*pi, pi, 5)
     pygame.draw.circle(screen, YELLOW, [x_val, y_val], radius)
     pygame.draw.rect(screen, RED, [160, 150, 400, 250])
     pygame.draw.rect(screen, WHITE, [190, 180, 60, 50])
@@ -52,6 +65,7 @@ while not done:
     pygame.draw.rect(screen, WHITE, [450, 300, 60, 50])
     pygame.draw.rect(screen, WHITE, [190, 300, 60, 50])
     pygame.draw.rect(screen, WHITE, [320, 300, 60, 100])
+
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
  
