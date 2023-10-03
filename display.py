@@ -27,9 +27,8 @@ clock = pygame.time.Clock()
 x_val = 50
 y_val = 175
 radius = 25
-x = 1
 x_offset = 1
-y_offset = 1
+y_offset = math.sin(3/5)
 pi = 3.141592652
 
 # -------- Main Program Loop -----------
@@ -40,15 +39,15 @@ while not done:
             done = True # Flag that we are done so we exit this loop
  
     # --- Game logic should go here
-    if x_val > 0:
+    if x_val >= 0:
         x_val = x_val + x_offset
-    if y_val == 0:
+    if x_val > 350:
         y_val = y_val + 1*y_offset
     else:
         y_val = y_val + -1*y_offset
-    if x_val == 900:
+    if x_val == 750:
         x_val = 0
-    
+        y_val = 175
  
     # First, clear the screen to white. Don't put other drawing commands
     # above this, or they will be erased with this command.
