@@ -55,51 +55,23 @@ while not done:
     x_val = x_val + x_offset
     if y_val < 0:
         y_offset = y_offset*-1
-    elif y_val > 500:
+    elif y_val > 495:
         y_offset = y_offset*-1
     elif x_val < 0:
         x_offset = x_offset*-1
-    elif x_val > 700:
+    elif x_val > 695:
         x_offset = x_offset*-1
     #end if
 
     if y_val < 0:
-        if randomint == 1:
-            screenfill = PINK
-        if randomint == 2:
-            screenfill = BLUE
-        if randomint == 3:
-            screenfill = PURPLE
-        if randomint == 4:
-            screenfill = GREEN
-
-    elif y_val > 500:
-        if randomint == 1:
-            screenfill = PINK
-        if randomint == 2:
-            screenfill = BLUE
-        if randomint == 3:
-            screenfill = PURPLE
-        if randomint == 4:
-            screenfill = GREEN
+        screenfill = BLUE
+    elif y_val > 495:
+        screenfill = PINK
     elif x_val < 0:
-        if randomint == 1:
-            screenfill = PINK
-        if randomint == 2:
-            screenfill = BLUE
-        if randomint == 3:
-            screenfill = PURPLE
-        if randomint == 4:
-            screenfill = GREEN
-    elif x_val > 700:
-        if randomint == 1:
-            screenfill = PINK
-        if randomint == 2:
-            screenfill = BLUE
-        if randomint == 3:
-            screenfill = PURPLE
-        if randomint == 4:
-            screenfill = GREEN
+        screenfill = PURPLE
+    elif x_val > 695:
+        screenfill = GREEN
+
 
 
 
