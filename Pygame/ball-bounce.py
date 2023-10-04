@@ -1,8 +1,6 @@
 import pygame
 import math
-
-import pygame
-import math
+import random
 # Initialize the game engine
 pygame.init()
 
@@ -13,6 +11,8 @@ GREEN    = (   0, 255,   0)
 RED      = ( 255,   0,   0)
 BLUE     = (   0,   0, 255)
 YELLOW = (255 , 255, 0)
+PURPLE = (150, 0, 150)
+PINK = (255,192,203)
 size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Otis's test:")
@@ -28,7 +28,8 @@ x_offset = 3
 y_offset = 3
 pi= 3.141592652
 counter = 0
-
+screenfill = BLUE
+randomint = random.randint(1,4)
  
 # -------- Main Program Loop -----------
 while not done:
@@ -45,7 +46,7 @@ while not done:
     # above this, or they will be erased with this command.
    
     
-    screen.fill(BLUE)
+    screen.fill(screenfill)
     
     
     #draw stuff here:
@@ -62,7 +63,45 @@ while not done:
         x_offset = x_offset*-1
     #end if
 
-    
+    if y_val < 0:
+        if randomint == 1:
+            screenfill = PINK
+        if randomint == 2:
+            screenfill = BLUE
+        if randomint == 3:
+            screenfill = PURPLE
+        if randomint == 4:
+            screenfill = GREEN
+
+    elif y_val > 500:
+        if randomint == 1:
+            screenfill = PINK
+        if randomint == 2:
+            screenfill = BLUE
+        if randomint == 3:
+            screenfill = PURPLE
+        if randomint == 4:
+            screenfill = GREEN
+    elif x_val < 0:
+        if randomint == 1:
+            screenfill = PINK
+        if randomint == 2:
+            screenfill = BLUE
+        if randomint == 3:
+            screenfill = PURPLE
+        if randomint == 4:
+            screenfill = GREEN
+    elif x_val > 700:
+        if randomint == 1:
+            screenfill = PINK
+        if randomint == 2:
+            screenfill = BLUE
+        if randomint == 3:
+            screenfill = PURPLE
+        if randomint == 4:
+            screenfill = GREEN
+
+
 
     pygame.draw.circle(screen, YELLOW, [x_val, y_val] , 20)
     # --- Go ahead and update the screen with what we've drawn.
