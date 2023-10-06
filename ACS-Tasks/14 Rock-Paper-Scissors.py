@@ -3,7 +3,7 @@ import random
 Number = random.randint(0,3)
 
 Player_Choice = input("Choose rock, paper or scissors: ")
-
+    
 if Number == 1:
     print("The computer chose rock")
 elif Number == 2:
