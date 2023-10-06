@@ -22,14 +22,17 @@ done = False
  
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
-x_val = 0
-y_val = 200
-x_offset = 3
-y_offset = 3
+x_val = 350
+y_val = 250
+x_offset = 5
+y_offset = 5
 pi= 3.141592652
 counter = 0
 screenfill = BLUE
 randomint = random.randint(1,4)
+y_val_2 = 200
+x_val_2 = 5
+lives = 5
  
 # -------- Main Program Loop -----------
 while not done:
@@ -50,32 +53,48 @@ while not done:
     
     
     #draw stuff here:
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_UP]:
+        y_val_2 -= 5
+    if keys[pygame.K_DOWN]:
+        y_val_2 += 5
+
 
     y_val = y_val+ y_offset
     x_val = x_val + x_offset
     if y_val < 0:
-        y_offset = y_offset*-1
+        y_offset = y_offset*-1 
+
     elif y_val > 495:
-        y_offset = y_offset*-1
-    elif x_val < 0:
-        x_offset = x_offset*-1
+        y_offset = y_offset*-1 
+        
+    
     elif x_val > 695:
-        x_offset = x_offset*-1
+        x_offset = x_offset*-1 
+    
+    elif x_val < 20 and y_val >= y_val_2 and y_val <= y_val_2 + 100:
+        x_offset = x_offset*-1 
+        
+    if x_val < 0 and y_val >= y_val_2+100:
+        screenfill = RED
+        x_val = 350
+        y_val = 250
+        screenfill = BLUE
+        lives -= 1
+    
+    elif x_val < 0 and y_val <= y_val_2:
+        screenfill = RED
+        x_val = 350
+        y_val = 250
+        screenfill = BLUE
+        lives -= 1    
+    
+
     #end if
 
-    if y_val < 0:
-        screenfill = BLUE
-    elif y_val > 495:
-        screenfill = PINK
-    elif x_val < 0:
-        screenfill = PURPLE
-    elif x_val > 695:
-        screenfill = GREEN
+    pygame.draw.circle(screen, YELLOW, [x_val, y_val] , 10)
 
-
-
-
-    pygame.draw.circle(screen, YELLOW, [x_val, y_val] , 20)
+    pygame.draw.rect(screen, WHITE, (5, y_val_2, 15, 100))
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
  
