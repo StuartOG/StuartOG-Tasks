@@ -33,6 +33,12 @@ randomint = random.randint(1,4)
 y_val_2 = 200
 x_val_2 = 5
 lives = 5
+text_font = pygame.font.SysFont(None, 30)
+
+def drawtext(text, font, text_col, x, y):
+    img = font.render(text, False, text_col)
+    screen.blit(img, (x, y))
+
  
 # -------- Main Program Loop -----------
 while not done:
@@ -53,6 +59,8 @@ while not done:
     
     
     #draw stuff here:
+
+    drawtext(lives, text_font, (0, 0, 0), 220, 150)
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]:
         y_val_2 -= 5
