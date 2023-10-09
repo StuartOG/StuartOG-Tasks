@@ -34,10 +34,8 @@ y_val_2 = 200
 x_val_2 = 5
 lives = 5
 text_font = pygame.font.SysFont(None, 30)
-
-def drawtext(text, font, text_col, x, y):
-    img = font.render(text, False, text_col)
-    screen.blit(img, (x, y))
+font = pygame.font.SysFont(None, 30)
+end = ""
 
  
 # -------- Main Program Loop -----------
@@ -59,8 +57,9 @@ while not done:
     
     
     #draw stuff here:
+    endmessage = font.render(end, True, BLACK)
+    screen.blit(endmessage, [270,100])
 
-    drawtext(lives, text_font, (0, 0, 0), 220, 150)
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]:
         y_val_2 -= 5
@@ -96,6 +95,14 @@ while not done:
         y_val = 250
         screenfill = BLUE
         lives -= 1    
+    
+    if lives == 0:
+        rect_x = 380
+        rect_y = 230
+        x_change=0
+        y_change=0
+        end = "GAME OVER"
+
     
 
     #end if
