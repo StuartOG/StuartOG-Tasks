@@ -1,6 +1,8 @@
 import pygame
 import math
 import random
+import os
+import time
 # Initialize the game engine
 pygame.init()
 
@@ -59,6 +61,8 @@ while not done:
     #draw stuff here:
     endmessage = font.render(end, True, BLACK)
     screen.blit(endmessage, [270,100])
+    lifecount=font.render('your life count is ' + str(lives), True, BLACK)
+    screen.blit(lifecount, [250, 100])
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]:
@@ -98,7 +102,11 @@ while not done:
     
     if lives == 0:
         end = "GAME OVER"
-
+        endmessage = font.render(end, True, BLACK)
+        screen.blit(endmessage, [270,75])
+        pygame.display.flip()
+        time.sleep(1)
+        done = True
     
 
     #end if
