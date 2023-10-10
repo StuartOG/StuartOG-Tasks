@@ -73,6 +73,7 @@ while not done:
 
     y_val = y_val+ y_offset
     x_val = x_val + x_offset
+
     if y_val < 0:
         y_offset = y_offset*-1 
 
@@ -85,6 +86,8 @@ while not done:
     
     elif x_val < 20 and y_val >= y_val_2 and y_val <= y_val_2 + 100:
         x_offset = x_offset*-1 
+        y_val = y_val+ y_offset+1
+        x_val = x_val+ y_offset+1
         
     if x_val < 0 and y_val >= y_val_2+100:
         screenfill = RED
