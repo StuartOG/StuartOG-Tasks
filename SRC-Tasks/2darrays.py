@@ -11,7 +11,7 @@ my_col = int(input("Enter a col to move to: "))
 my_col = my_col - 1
 
 arr[0][0] = 'X'
-arr[my_row, my_col] = 'O'
+arr[my_row][my_col] = 'O'
 for row in arr:
     for x in row:
         print(x, end=' ')

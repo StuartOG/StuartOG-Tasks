@@ -10,9 +10,9 @@ WHITE    = ( 255, 255, 255)
 GREEN    = (   0, 255,   0)
 RED      = ( 255,   0,   0)
 BLUE     = (   0,   0, 255)
-YELLOW = (255 , 255, 0)
-PURPLE = (150, 0, 150)
-PINK = (255,192,203)
+YELLOW   = (255 , 255,   0)
+PURPLE   = ( 150,   0, 150)
+PINK     = ( 255, 192, 203)
 size = (700, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Otis's test:")
@@ -97,10 +97,6 @@ while not done:
         lives -= 1    
     
     if lives == 0:
-        rect_x = 380
-        rect_y = 230
-        x_change=0
-        y_change=0
         end = "GAME OVER"
 
     
