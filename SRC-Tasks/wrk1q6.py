@@ -10,22 +10,23 @@ while system is True:
     car_row = car_row - 1
     car_col = int(input("Enter the col you parked in: "))
     car_col = car_col - 1
-    car_number_plate = input("Enter the number plate")
     if arr[car_row][car_col] == 'taken':
-        print("Enter a valid spot")
+        print("Enter a valid spot") #if the spot is already taken then you must input a different spot
         system = True
     #end if
     
-    arr[car_row][car_col] = 'taken', car_number_plate
+    arr[car_row][car_col] = 'taken, '
     for row in arr:
         for x in row:
             print(x, end=' ')
         print()
+
+    #next row
     question = input("Do you want to continue? y or n: ")
     if question == "y":
-        system = True
+        system = True #loops the system again
     else:
-        system = False
-
+        system = False #stops the loop
+    #end if
 
 
