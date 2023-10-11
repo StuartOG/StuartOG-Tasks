@@ -150,7 +150,7 @@ while not done:
     if left_lives > 5:
         end = "Player One Wins"
         endmessage = font.render(end, True, BLACK)
-        screen.blit(endmessage, [250,75])
+        screen.blit(endmessage, [225,75])
         pygame.display.flip()
         time.sleep(1)
         done = True
@@ -158,7 +158,7 @@ while not done:
     if right_lives > 5:
         end = "Player Two Wins"
         endmessage = font.render(end, True, BLACK)
-        screen.blit(endmessage, [250,75])
+        screen.blit(endmessage, [225,75])
         pygame.display.flip()
         time.sleep(1)
         done = True

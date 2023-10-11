@@ -5,13 +5,13 @@ for row in arr:
         print(x, end=' ')
     print()
 system = True
-while system is True:
+while system is True: #will loop for however many times needed
     car_row = int(input("Enter the row you parked in: "))
     car_row = car_row - 1
     car_col = int(input("Enter the col you parked in: "))
     car_col = car_col - 1
-    if arr[car_row][car_col] == 'taken':
-        print("Enter a valid spot") #if the spot is already taken then you must input a different spot
+    if arr[car_row][car_col] == 'taken, ':
+        print("Space already taken.") #if the spot is already taken then you must input a different spot
         system = True
     #end if
     
