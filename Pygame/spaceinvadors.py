@@ -51,28 +51,23 @@ class Snow(pygame.sprite.Sprite):
         super().__init__()
 
         self.size = size
-        size = random.randrange(2, 6)
+        size = random.randrange(20, 25)
         self.image = pygame.Surface([size * 2, size * 2], pygame.SRCALPHA)
-        pygame.draw.circle(self.image, WHITE, (size, size), size)
+        pygame.draw.circle(self.image, BLACK, (size, size), size)
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(0, 800)
-        self.rect.y = random.randrange(0, 400)
-        self.speed = random.randrange(1, 5)
-        self.horizontalspeed = random.randrange(-2,2)
+        self.rect.y = 0
+        self.speed = random.randrange(1, 2)
+
 
     def update(self):
         if self.rect.y > 500:
             self.rect.y = -self.size
-            self.rect.x = self.rect.x + self.horizontalspeed
         else:
             self.rect.y = self.rect.y + self.speed
         #end if
-        if self.rect.y > 0:
-            self.rect.x = self.rect.x + self.horizontalspeed
-        if self.rect.x < 0 and self.rect.y > 500:
-            self.rect.x = random.randrange(0,800)
-        elif self.rect.x > 00 and self.rect.y > 500:
-            self.rect.x = random.randrange(0,800)
+
+
         
 
 # end Class snow
@@ -83,11 +78,11 @@ class Snow(pygame.sprite.Sprite):
 
 size = random.randrange(1,2)
 
-snow_group = pygame.sprite.Group()
-number_of_flakes = 200
+invader_group = pygame.sprite.Group()
+number_of_flakes = 10
 for _ in range(number_of_flakes):
     flake = Snow(size)
-    snow_group.add(flake)
+    invader_group.add(flake)
 # for i in range (0, number_of_flakes):
 #     flake = Snow(size, size)
 #     snow_group.add(flake)
@@ -101,7 +96,7 @@ while not done:
             done = True # Flag that we are done so we exit this loop
  
     # --- Game logic should go here
-    snow_group.update()
+    invader_group.update()
 
     # --- Drawing code should go here
  
@@ -109,9 +104,9 @@ while not done:
 
     # First, clear the screen to white. Don't put other drawing commands
     # above this, or they will be erased with this command.
-    screen.fill(nighttime)
+    screen.fill(WHITE)
  
-    snow_group.draw(screen)
+    invader_group.draw(screen)
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
  

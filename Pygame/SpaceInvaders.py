@@ -1,9 +1,8 @@
 import pygame
 import math
-import random
 import os
-import time
-# Initialize the game engine
+import random
+
 pygame.init()
 
 # Define some colors
@@ -35,9 +34,46 @@ moon_glow = ((235,245,255))
 nighttime = (19,24,98)
 colours = [GREEN,RED,BLUE,PURPLE,PINK, blue_green, marroon, lime,gray,magenta,brown,forest_green,navy_blue,rust,dandilion_yellow,highlighter
            ,sky_blue,light_gray,dark_gray,tan,coffee_brown,moon_glow,nighttime]
-size = (800, 500)
+
+ScreenX = 800
+ScreenY = 500
+
+size = (ScreenX, ScreenY)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("Otis's Snow")
+pygame.display.set_caption("Otis's Space Invaders")
+
+
+#Classes
+class Invader():
+    def __init__(self, size):
+        super().__init__()
+
+        self.size = size
+        size = random.randrange(20, 25)
+        self.image = pygame.Surface([size * 2, size * 2], pygame.SRCALPHA)
+        pygame.draw.circle(self.image, WHITE, (size, size), size)
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randrange(0, 800)
+        self.speed = random.randrange(1, 3)
+    
+    def update(self):
+        if self.rect.y > 500:
+            end = "Game Over"
+            endmessage = font.render(end, True, BLACK)
+            screen.blit()
+
+
+#Global Variables
+
+text_font = pygame.font.SysFont(None, 30)
+font = pygame.font.SysFont(None, 50)
+endmessage = ""
+space_group = pygame.sprite.Group()
+
+number_of_invaders = 200
+for _ in range(number_of_invaders):
+    invader = Invader(size)
+    space_group.add(invader)
 
 # Loop until the user clicks the close button.
 done = False
@@ -45,54 +81,6 @@ done = False
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
  
-#classes
-class Snow(pygame.sprite.Sprite):
-    def __init__(self, size):
-        super().__init__()
-
-        self.size = size
-        size = random.randrange(2, 6)
-        self.image = pygame.Surface([size * 2, size * 2], pygame.SRCALPHA)
-        pygame.draw.circle(self.image, WHITE, (size, size), size)
-        self.rect = self.image.get_rect()
-        self.rect.x = random.randrange(0, 800)
-        self.rect.y = random.randrange(0, 400)
-        self.speed = random.randrange(1, 5)
-        self.horizontalspeed = random.randrange(-2,2)
-
-    def update(self):
-        if self.rect.y > 500:
-            self.rect.y = -self.size
-            self.rect.x = self.rect.x + self.horizontalspeed
-        else:
-            self.rect.y = self.rect.y + self.speed
-        #end if
-        if self.rect.y > 0:
-            self.rect.x = self.rect.x + self.horizontalspeed
-        if self.rect.x < 0 and self.rect.y > 500:
-            self.rect.x = random.randrange(0,800)
-        elif self.rect.x > 00 and self.rect.y > 500:
-            self.rect.x = random.randrange(0,800)
-        
-
-# end Class snow
-
-
-
-# Global variables
-
-size = random.randrange(1,2)
-
-snow_group = pygame.sprite.Group()
-number_of_flakes = 200
-for _ in range(number_of_flakes):
-    flake = Snow(size)
-    snow_group.add(flake)
-# for i in range (0, number_of_flakes):
-#     flake = Snow(size, size)
-#     snow_group.add(flake)
-# Next i
-
 # -------- Main Program Loop -----------
 while not done:
     # --- Main event loop
@@ -101,17 +89,15 @@ while not done:
             done = True # Flag that we are done so we exit this loop
  
     # --- Game logic should go here
-    snow_group.update()
-
+    space_group.update()
     # --- Drawing code should go here
  
-    
-
     # First, clear the screen to white. Don't put other drawing commands
     # above this, or they will be erased with this command.
     screen.fill(nighttime)
+
+    space_group.draw(screen)
  
-    snow_group.draw(screen)
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
  
