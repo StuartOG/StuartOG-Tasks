@@ -35,7 +35,7 @@ moon_glow = ((235,245,255))
 nighttime = (19,24,98)
 colours = [GREEN,RED,BLUE,PURPLE,PINK, blue_green, marroon, lime,gray,magenta,brown,forest_green,navy_blue,rust,dandilion_yellow,highlighter
            ,sky_blue,light_gray,dark_gray,tan,coffee_brown,moon_glow,nighttime]
-size = (700, 500)
+size = (800, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Otis's Snow")
 
@@ -55,7 +55,7 @@ class Snow(pygame.sprite.Sprite):
         self.image = pygame.Surface([size * 2, size * 2], pygame.SRCALPHA)
         pygame.draw.circle(self.image, WHITE, (size, size), size)
         self.rect = self.image.get_rect()
-        self.rect.x = random.randrange(0, 700)
+        self.rect.x = random.randrange(0, 800)
         self.rect.y = random.randrange(0, 400)
         self.speed = random.randrange(1, 5)
         self.horizontalspeed = random.randrange(-2,2)
@@ -70,9 +70,9 @@ class Snow(pygame.sprite.Sprite):
         if self.rect.y > 0:
             self.rect.x = self.rect.x + self.horizontalspeed
         if self.rect.x < 0 and self.rect.y > 500:
-            self.rect.x = random.randrange(0,700)
-        elif self.rect.x > 700 and self.rect.y > 500:
-            self.rect.x = random.randrange(0,700)
+            self.rect.x = random.randrange(0,800)
+        elif self.rect.x > 800 and self.rect.y > 500:
+            self.rect.x = random.randrange(0,800)
         
 
 # end Class snow
@@ -81,10 +81,10 @@ class Snow(pygame.sprite.Sprite):
 
 # Global variables
 
-size = random.randrange(2,6)
+size = random.randrange(1,2)
 
 snow_group = pygame.sprite.Group()
-number_of_flakes = 500
+number_of_flakes = 200
 for _ in range(number_of_flakes):
     flake = Snow(size)
     snow_group.add(flake)

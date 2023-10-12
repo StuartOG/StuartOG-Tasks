@@ -43,6 +43,49 @@ done = False
  
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
+
+#classes
+class Snow(pygame.sprite.Sprite):
+    def __init__(self, size):
+        super().__init__()
+
+        self.size = size
+        size = random.randrange(2, 6)
+        self.image = pygame.Surface([size * 2, size * 2], pygame.SRCALPHA)
+        pygame.draw.circle(self.image, WHITE, (size, size), size)
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randrange(0, 800)
+        self.rect.y = random.randrange(0, 400)
+        self.speed = random.randrange(1, 5)
+        self.horizontalspeed = random.randrange(-2,2)
+
+    def update(self):
+        if self.rect.y > 500:
+            self.rect.y = -self.size
+            self.rect.x = self.rect.x + self.horizontalspeed
+        else:
+            self.rect.y = self.rect.y + self.speed
+        #end if
+        if self.rect.y > 0:
+            self.rect.x = self.rect.x + self.horizontalspeed
+        if self.rect.x < 0 and self.rect.y > 500:
+            self.rect.x = random.randrange(0,800)
+        elif self.rect.x > 800 and self.rect.y > 500:
+            self.rect.x = random.randrange(0,800)
+
+#Global Variables
+size = random.randrange(1,2)
+
+snow_group = pygame.sprite.Group()
+number_of_flakes = 50
+for _ in range(number_of_flakes):
+    flake = Snow(size)
+    snow_group.add(flake)
+# for i in range (0, number_of_flakes):
+#     flake = Snow(size, size)
+#     snow_group.add(flake)
+# Next i
+
 x_val = 350
 y_val = 250
 x_offset = 5
@@ -70,7 +113,9 @@ while not done:
             done = True # Flag that we are done so we exit this loop
  
     # --- Game logic should go here
- 
+    
+    snow_group.update() 
+
     # --- Drawing code should go here
  
     # First, clear the screen to white. Don't put other drawing commands
@@ -80,6 +125,7 @@ while not done:
     screen.fill(screenfill_fill)
     
     
+    snow_group.draw(screen)
     #draw stuff here:
     endmessage = font.render(end, True, BLACK)
     screen.blit(endmessage, [270,100])
@@ -167,7 +213,7 @@ while not done:
     #end if
     pygame.draw.rect(screen, BLACK, (x_val, y_val, 12, 12))
 
-    pygame.draw.rect(screen, WHITE, (x_val, y_val , 10, 10))
+    pygame.draw.rect(screen, YELLOW, (x_val, y_val , 10, 10))
 
     pygame.draw.rect(screen, BLACK, (5, y_val_2, 15, 100))
 
