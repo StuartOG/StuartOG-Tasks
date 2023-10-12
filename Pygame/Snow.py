@@ -47,23 +47,21 @@ clock = pygame.time.Clock()
  
 #classes
 class Snow(pygame.sprite.Sprite):
-    
-    #Constructor function
-    def __init__(self, s_width, s_length):
+    def __init__(self, size):
         super().__init__()
-        
-        self.image = pygame.Surface([s_width, s_length])
-        self.image.fill(WHITE)
-        self.speed = random.randrange(1,5)
-        self.rect=self.image.get_rect()
-        self.rect.x=random.randrange(0,700)
-        self.rect.y=random.randrange(0,400)
 
-    #end of constructor function
+        self.size = size
+        size = random.randrange(2, 6)
+        self.image = pygame.Surface([size * 2, size * 2], pygame.SRCALPHA)
+        pygame.draw.circle(self.image, WHITE, (size, size), size)
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randrange(0, 700)
+        self.rect.y = random.randrange(0, 400)
+        self.speed = random.randrange(1, 5)
 
     def update(self):
         if self.rect.y > 500:
-            self.rect.y = -50
+            self.rect.y = -self.size
         else:
             self.rect.y = self.rect.y + self.speed
 
@@ -77,9 +75,12 @@ size = random.randrange(2,6)
 
 snow_group = pygame.sprite.Group()
 number_of_flakes = 500
-for i in range (0, number_of_flakes):
-    flake = Snow(size, size)
+for _ in range(number_of_flakes):
+    flake = Snow(size)
     snow_group.add(flake)
+# for i in range (0, number_of_flakes):
+#     flake = Snow(size, size)
+#     snow_group.add(flake)
 # Next i
 
 # -------- Main Program Loop -----------
