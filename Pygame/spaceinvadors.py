@@ -75,6 +75,7 @@ class Snow(pygame.sprite.Sprite):
 
 
 # Global variables
+x_val = 400
 
 size = random.randrange(1,2)
 
@@ -105,7 +106,12 @@ while not done:
     # First, clear the screen to white. Don't put other drawing commands
     # above this, or they will be erased with this command.
     screen.fill(WHITE)
- 
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        x_val-= 3
+    if keys[pygame.K_RIGHT]:
+        x_val += 3
+    pygame.draw.rect(screen, BLACK, (x_val, 460, 70, 30 ))
     invader_group.draw(screen)
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
