@@ -58,15 +58,21 @@ class Snow(pygame.sprite.Sprite):
         self.rect.x = random.randrange(0, 700)
         self.rect.y = random.randrange(0, 400)
         self.speed = random.randrange(1, 5)
-        self.horizontalspeed = random.randrange(-1, 1)
+        self.horizontalspeed = random.randrange(-2,2)
 
     def update(self):
         if self.rect.y > 500:
             self.rect.y = -self.size
+            self.rect.x = self.rect.x + self.horizontalspeed
         else:
             self.rect.y = self.rect.y + self.speed
+        #end if
         if self.rect.y > 0:
             self.rect.x = self.rect.x + self.horizontalspeed
+        if self.rect.x < 0 and self.rect.y > 500:
+            self.rect.x = random.randrange(0,700)
+        elif self.rect.x > 700 and self.rect.y > 500:
+            self.rect.x = random.randrange(0,700)
         
 
 # end Class snow
