@@ -37,7 +37,7 @@ colours = [GREEN,RED,BLUE,PURPLE,PINK, blue_green, marroon, lime,gray,magenta,br
            ,sky_blue,light_gray,dark_gray,tan,coffee_brown,moon_glow,nighttime]
 size = (700, 500)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption("Otis's pong game")
+pygame.display.set_caption("Otis's Snow")
 
 # Loop until the user clicks the close button.
 done = False
@@ -58,12 +58,16 @@ class Snow(pygame.sprite.Sprite):
         self.rect.x = random.randrange(0, 700)
         self.rect.y = random.randrange(0, 400)
         self.speed = random.randrange(1, 5)
+        self.horizontalspeed = random.randrange(-1, 1)
 
     def update(self):
         if self.rect.y > 500:
             self.rect.y = -self.size
         else:
             self.rect.y = self.rect.y + self.speed
+        if self.rect.y > 0:
+            self.rect.x = self.rect.x + self.horizontalspeed
+        
 
 # end Class snow
 
