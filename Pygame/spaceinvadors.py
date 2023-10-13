@@ -80,10 +80,11 @@ x_val = 400
 size = random.randrange(1,2)
 
 invader_group = pygame.sprite.Group()
-number_of_flakes = 10
-for _ in range(number_of_flakes):
+number_of_enemies = 10
+for _ in range(number_of_enemies):
     flake = Snow(size)
     invader_group.add(flake)
+number_of_enemies +=5
 # for i in range (0, number_of_flakes):
 #     flake = Snow(size, size)
 #     snow_group.add(flake)
