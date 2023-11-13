@@ -140,6 +140,8 @@ x_val2 = 350
 
 over = False
 
+done = True
+
 game_over = "Game Over"
 end = ""
 text_font = pygame.font.SysFont(None, 30)
@@ -173,7 +175,7 @@ for _ in range(1):
 
 
 # -------- Main Program Loop -----------
-while not done:
+while done == True:
     # --- Main event loop
     for event in pygame.event.get(): # User did something
         if event.type == pygame.QUIT: # If user clicked close
@@ -221,10 +223,10 @@ while not done:
     bullet_group.update()
 
     if over == True:
-        end = "game over"
-        endmessage = screen.blit(end, [400, 250])
-        pygame.display.flip()
+        end = font.render(str("Game Over"), True, BLACK)
+        screen.blit(end, [300, 150])
         time.sleep(1)
+        done = False
 
 
     # --- Go ahead and update the screen with what we've drawn.
