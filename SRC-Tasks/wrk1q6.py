@@ -28,5 +28,3 @@ while system is True: #will loop for however many times needed
     else:
         system = False #stops the loop
     #end if
-
-
