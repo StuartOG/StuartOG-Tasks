@@ -40,15 +40,20 @@ def AddItem(newItem, myList):
             nextfree = temp
         else:
             p = start
-            if newItem < myList[p].name:  
-                start  = myList[nextfree].pointer
+            if newItem < myList[p].name:
+                temp = myList[nextfree].pointer  
+                start = myList[nextfree].pointer
                 start = nextfree
+                nextfree = temp
             else:   
-                placeFound = False    #general case
-                while myList[p].pointer != -1 and placeFound == False:
+                placefound = False    #general case
+                while myList[p].pointer != -1 and placefound == False:
                     #peek ahead
                     if newItem >= myList[myList[p].pointer].name:
-                        p = myList[p].pointer
+                        temp = myList[nextfree].pointer
+                        
+                        myList[p].pointer = -1
+
                     else:
                         placefound = True
                     
@@ -58,10 +63,12 @@ def AddItem(newItem, myList):
                 myList[temp].pointer = myList[p].pointer
                 myList[p].pointer = temp
 
+
 AddItem("Colin",myList)
 AddItem("Albert",myList)
 AddItem("Barry",myList)
 AddItem("Derek",myList)
 AddItem("Fred",myList)
-outputList(myList)
-AddItem("Trevor",myList)
+print(nextfree)
+# outputList(myList)
+# AddItem("Trevor",myList)
