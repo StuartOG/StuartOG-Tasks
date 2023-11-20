@@ -63,7 +63,7 @@ def AddItem(newItem, myList):
                 myList[temp].pointer = myList[p].pointer
                 myList[p].pointer = temp
 
-def removeItem(Item):
+def deleteItem(Item):
     global nextfree
     global start
     if start == -1:
@@ -73,13 +73,14 @@ def removeItem(Item):
         if Item == myList[start].name:
             start = myList[start].pointer
         else:
-            while Item != myList[myList[p].pointer].name:
+            while myList[p].pointer != -1 and Item != myList[myList[p].pointer].name:
                 p = myList[p].pointer
-            #endwhile
-        #endif
-    #endif
-    nextfree = myList[p].pointer
-    myList[p].pointer = myList[nextfree].pointer
+
+            if myList[p].pointer != -1:
+                nextfree = myList[p].pointer
+                myList[p].pointer = myList[nextfree].pointer
+            else:
+                print(f"Item {Item} not found in the list.")
 
 
 AddItem("Colin",myList)
