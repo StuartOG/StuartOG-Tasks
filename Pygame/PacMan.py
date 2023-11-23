@@ -20,20 +20,15 @@ screen = pygame.display.set_mode(size)
 move_x = 0
 move_y = 0
 
-class Map(pygame.sprite.Sprite):
-    def __init__(self, width, height) -> None:
-        super().__init__()
-        self.width = width
-        self.height = height
-
 
 class Block(pygame.sprite.Sprite):
-    def __init__(self, block_width, block_height) -> None:
+    def __init__(self, block_width, block_height, x_val, y_val) -> None:
         super().__init__()
-        self.width = block_width
-        self.height = block_height
-        block_width = 10
-        block_height = 10
+        self.image = pygame.Surface([block_width, block_height])
+        self.image.fill(BLACK)
+        self.rect=self.image.get_rect()#Setthepositionoftheplayerattributes
+        self.rect.x=x_val
+        self.rect.y=y_val
 
 
 class Pacman(pygame.sprite.Sprite):
@@ -60,8 +55,8 @@ class Pacman(pygame.sprite.Sprite):
     def update(self):
         global move_x
         global move_y
-        self.rect.x = move_x
-        self.rect.y = move_y
+        self.rect.x += move_x
+        self.rect.y += move_y
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
             move_x = -1
@@ -95,6 +90,16 @@ class Ghost(pygame.sprite.Sprite):
     def __init__(self) -> None:
         super().__init__()
 
+map =[[1,1,1,1,1,1,1,1,1,1], 
+      [1,0,0,0,0,0,0,0,0,1],
+      [1,0,0,0,0,0,0,0,0,1], 
+      [1,1,0,1,1,1,1,1,0,1], 
+      [1,0,0,0,0,0,1,0,0,1],
+      [1,0,1,1,1,0,1,0,0,1],
+      [1,0,1,1,1,0,1,0,0,1],
+      [1,0,1,1,1,0,1,0,0,1], 
+      [1,0,0,0,0,0,0,0,0,1], 
+      [1,1,1,1,1,1,1,1,1,1]]
 
 all_sprites = pygame.sprite.Group()
 
@@ -105,6 +110,7 @@ for _ in range(1):
     all_sprites.add(pacman)
     player_group.add(pacman)
 pygame.display.set_caption("My Game")
+
  
 # Loop until the user clicks the close button.
 done = False
@@ -120,7 +126,8 @@ while not done:
             done = True
  
     # --- Game logic should go here
- 
+    all_sprites.update()
+    
     # --- Screen-clearing code goes here
  
     # Here, we clear the screen to white. Don't put other drawing commands
@@ -134,9 +141,7 @@ while not done:
     
 
 
-    all_sprites.update()
     all_sprites.draw(screen)
-
 
 
 
