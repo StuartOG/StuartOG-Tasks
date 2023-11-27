@@ -1,6 +1,5 @@
 import pygame
 
-
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -20,15 +19,6 @@ screen = pygame.display.set_mode(size)
 move_x = 0
 move_y = 0
 
-
-class Block(pygame.sprite.Sprite):
-    def __init__(self, block_width, block_height, x_val, y_val) -> None:
-        super().__init__()
-        self.image = pygame.Surface([block_width, block_height])
-        self.image.fill(BLACK)
-        self.rect=self.image.get_rect()#Setthepositionoftheplayerattributes
-        self.rect.x=x_val
-        self.rect.y=y_val
 
 
 class Pacman(pygame.sprite.Sprite):
@@ -75,7 +65,17 @@ class Pacman(pygame.sprite.Sprite):
             self.rect.left = 0
         if self.rect.right > 800:
             self.rect.right = 800
-            
+
+        wall_collision = pygame.sprite.spritecollide(self, wall_list, False)
+        for wall in wall_collision:
+            if move_x > 0:
+                move_x = 0
+            elif move_x < 0:
+                move_x = 0
+            if move_y > 0:
+                move_y = 0
+            elif move_y < 0:
+                move_y = 0
 
         
 class Item(pygame.sprite.Sprite):
@@ -90,23 +90,53 @@ class Ghost(pygame.sprite.Sprite):
     def __init__(self) -> None:
         super().__init__()
 
-map =[[1,1,1,1,1,1,1,1,1,1], 
-      [1,0,0,0,0,0,0,0,0,1],
-      [1,0,0,0,0,0,0,0,0,1], 
-      [1,1,0,1,1,1,1,1,0,1], 
-      [1,0,0,0,0,0,1,0,0,1],
-      [1,0,1,1,1,0,1,0,0,1],
-      [1,0,1,1,1,0,1,0,0,1],
-      [1,0,1,1,1,0,1,0,0,1], 
-      [1,0,0,0,0,0,0,0,0,1], 
-      [1,1,1,1,1,1,1,1,1,1]]
+map = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
+    [1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1],
+    [1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+    [1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+    [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+]
+class Block(pygame.sprite.Sprite):
+    def __init__(self ,B_colour , width , height, B_xval, B_yval):
+        super().__init__()   
+        self.width = width
+        self.height = height
+        self.colour = B_colour   
+        self.image = pygame.Surface([self.width, self.height])
+        self.image.fill(self.colour)
+        self.rect = self.image.get_rect()  
+        self.rect.x = B_xval
+        self.rect.y = B_yval
+        
+    def update(self):
+        self = self
+
 
 all_sprites = pygame.sprite.Group()
-
+wall_list = pygame.sprite.Group()
 player_group = pygame.sprite.Group()
 
+for y in range(15):
+    for x in range(15):
+        if map[x][y] == 1:
+            my_wall = Block(WHITE ,20 , 20 , x*20 , y*20)
+            wall_list.add(my_wall)
+            all_sprites.add(my_wall)
+
+
 for _ in range(1):
-    pacman = Pacman(3, 10, 30)
+    pacman = Pacman(3, 20, 30)
     all_sprites.add(pacman)
     player_group.add(pacman)
 pygame.display.set_caption("My Game")
