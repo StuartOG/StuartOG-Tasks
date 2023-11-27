@@ -75,7 +75,7 @@ class Pacman(pygame.sprite.Sprite):
             if move_y > 0:
                 move_y = 0
             elif move_y < 0:
-                move_y = 0
+                move_y = 0  
 
         
 class Item(pygame.sprite.Sprite):
