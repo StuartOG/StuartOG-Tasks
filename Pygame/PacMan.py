@@ -60,22 +60,17 @@ class Pacman(pygame.sprite.Sprite):
         if keys[pygame.K_DOWN]:
             move_x = 0
             move_y = 1
-        
-        if self.rect.left < 0:
-            self.rect.left = 0
-        if self.rect.right > 800:
-            self.rect.right = 800
 
         wall_collision = pygame.sprite.spritecollide(self, wall_list, False)
         for wall in wall_collision:
             if move_x > 0:
-                move_x = 0
+                self.rect.right = wall.rect.left - 1
             elif move_x < 0:
-                move_x = 0
+                self.rect.left = wall.rect.right + 1
             if move_y > 0:
-                move_y = 0
+                self.rect.bottom = wall.rect.top - 1
             elif move_y < 0:
-                move_y = 0  
+                self.rect.top = wall.rect.bottom + 1
 
         
 class Item(pygame.sprite.Sprite):
