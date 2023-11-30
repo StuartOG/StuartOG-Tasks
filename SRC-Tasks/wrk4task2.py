@@ -41,5 +41,11 @@ palList = []
 while not s.isEmpty():
     palList.append(s.pop())
 
-print("".join(palList))
+
 print(s.data)
+print("".join(palList))
+
+if myString == "".join(palList):
+    print("Is palindrome")
+else:
+    print("Is not palindrome")
