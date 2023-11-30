@@ -28,7 +28,7 @@ def dequeue():
         item_p = q1_fp
         q1_fp = (q1_fp + 1) % MAX_SIZE
         q1_size -= 1
-        return q1[item_p]
+        return q1[item_p]  
     #end if
 #end function
     
