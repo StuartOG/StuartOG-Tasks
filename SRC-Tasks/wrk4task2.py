@@ -29,6 +29,13 @@ class Stack:
             temp = self.sp
             self.sp -= 1
             return self.data[temp]
+        
+    def peek(self):
+        if not self.isEmpty():
+            return self.data[self.sp]
+        else:
+            print("Stack is empty")
+
 
 #end class
 myString = input("Enter word or phrase: ")
