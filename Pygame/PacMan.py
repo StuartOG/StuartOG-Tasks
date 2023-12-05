@@ -1,4 +1,5 @@
 import pygame
+from pygame.sprite import _Group
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -94,7 +95,7 @@ map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
-    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
+    [1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
     [1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1],
     [1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
@@ -121,6 +122,19 @@ class Block(pygame.sprite.Sprite):
         
     def update(self):
         self = self
+    
+
+class Coin(pygame.sprite.Sprite):
+    def __init__(self, C_colour, width, height, C_xval, C_yval) -> None:
+        super().__init__()
+        self.colour = C_colour
+        self.width = width
+        self.height = height
+        self.image = pygame.Surface([self.width, self.height])
+        self.image.fill(self.colour)
+        self.rect = self.image.get_rect()  
+        self.rect.x = C_xval
+        self.rect.y = C_yval
 
 
 all_sprites = pygame.sprite.Group()
@@ -129,11 +143,16 @@ player_group = pygame.sprite.Group()
 
 for y in range(15):
     for x in range(15):
-        if map[x][y] == 1:
+        if map[y][x] == 1:
             my_wall = Block(WHITE ,20 , 20 , x*20 , y*20)
             wall_list.add(my_wall)
             all_sprites.add(my_wall)
 
+for y in range(15):
+    for x in range(15):
+        if map[y][x] == 0:
+            my_coin = Coin(YELLOW, 15, 15, x*15, y*20)
+            all_sprites.add(my_coin)
 
 for _ in range(1):
     pacman = Pacman(3, 20, 30)
