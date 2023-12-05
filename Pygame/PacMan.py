@@ -19,6 +19,9 @@ screen = pygame.display.set_mode(size)
 
 move_x = 0
 move_y = 0
+score = 0
+text_font = pygame.font.SysFont(None, 30)
+font = pygame.font.SysFont(None, 30)
 
 
 
@@ -37,8 +40,10 @@ class Pacman(pygame.sprite.Sprite):
         self.rect.y = initial_y
 
     def eatItem(self, item):
-        if item == item.pellet:
-            pass
+        global score
+        if isinstance(item, Coin):
+            score += 1
+            item.kill()
 
         elif item == item.buff:
             pass
@@ -77,7 +82,9 @@ class Pacman(pygame.sprite.Sprite):
                 self.rect.top = wall.rect.bottom + 1
                 move_y = 0
             
-
+        coin_collision = pygame.sprite.spritecollide(self, coin_list, False)
+        for coin in coin_collision:
+            pacman.eatItem(coin)
         
 class Item(pygame.sprite.Sprite):
 
@@ -140,18 +147,20 @@ class Coin(pygame.sprite.Sprite):
 all_sprites = pygame.sprite.Group()
 wall_list = pygame.sprite.Group()
 player_group = pygame.sprite.Group()
+coin_list = pygame.sprite.Group()
 
 for y in range(15):
     for x in range(15):
-        if map[y][x] == 1:
+        if map[x][y] == 1:
             my_wall = Block(WHITE ,20 , 20 , x*20 , y*20)
             wall_list.add(my_wall)
             all_sprites.add(my_wall)
 
 for y in range(15):
     for x in range(15):
-        if map[y][x] == 0:
+        if map[x][y] == 0:
             my_coin = Coin(YELLOW, 15, 15, x*20, y*20)
+            coin_list.add(my_coin)
             all_sprites.add(my_coin)
 
 for _ in range(1):
@@ -177,6 +186,7 @@ while not done:
     # --- Game logic should go here
     all_sprites.update()
     
+    
     # --- Screen-clearing code goes here
  
     # Here, we clear the screen to white. Don't put other drawing commands
@@ -192,6 +202,11 @@ while not done:
 
     all_sprites.draw(screen)
 
+    realscore = score 
+    score_count = font.render("Score Count: " + str(realscore), True, BLACK)
+    # endmessage = font.render(end, True, WHITE)
+    # screen.blit(endmessage, [271,103])
+    screen.blit(score_count, [200,4])
 
 
 
