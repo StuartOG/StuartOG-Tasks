@@ -1,5 +1,5 @@
 import pygame
-from pygame.sprite import _Group
+
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -31,7 +31,7 @@ class Pacman(pygame.sprite.Sprite):
         self.width = 10
         self.height = 10
         self.image = pygame.Surface([self.width, self.height])
-        self.image.fill(YELLOW), 
+        self.image.fill(PINK), 
         self.rect = self.image.get_rect()
         self.rect.x = initial_x
         self.rect.y = initial_y
@@ -95,7 +95,7 @@ map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
-    [1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
     [1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1],
     [1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
@@ -151,7 +151,7 @@ for y in range(15):
 for y in range(15):
     for x in range(15):
         if map[y][x] == 0:
-            my_coin = Coin(YELLOW, 15, 15, x*15, y*20)
+            my_coin = Coin(YELLOW, 15, 15, x*20, y*20)
             all_sprites.add(my_coin)
 
 for _ in range(1):
