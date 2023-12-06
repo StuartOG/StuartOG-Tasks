@@ -85,6 +85,10 @@ class Pacman(pygame.sprite.Sprite):
         coin_collision = pygame.sprite.spritecollide(self, coin_list, False)
         for coin in coin_collision:
             pacman.eatItem(coin)
+
+        ghost_collision = pygame.sprite.spritecollide(self, ghost_list, False)
+        for ghost in ghost_collision:
+            pass
         
 class Item(pygame.sprite.Sprite):
 
@@ -95,16 +99,23 @@ class Item(pygame.sprite.Sprite):
 
 
 class Ghost(pygame.sprite.Sprite):
-    def __init__(self) -> None:
+    def __init__(self, width, height, G_colour, G_xval, G_yval) -> None:
         super().__init__()
-
+        self.width = width
+        self.height = height
+        self.colour = G_colour   
+        self.image = pygame.Surface([self.width, self.height])
+        self.image.fill(self.colour)
+        self.rect = self.image.get_rect()  
+        self.rect.x = G_xval
+        self.rect.y = G_yval
 map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1],
-    [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
+    [1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1],
     [1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1],
-    [1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+    [1, 1, 0, 0, 1, 0, 1, 0, 1, 2, 0, 0, 0, 0, 1],
     [1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
     [1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
     [1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
@@ -112,7 +123,7 @@ map = [
     [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
     [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 class Block(pygame.sprite.Sprite):
@@ -148,6 +159,7 @@ all_sprites = pygame.sprite.Group()
 wall_list = pygame.sprite.Group()
 player_group = pygame.sprite.Group()
 coin_list = pygame.sprite.Group()
+ghost_list = pygame.sprite.Group()
 
 for y in range(15):
     for x in range(15):
@@ -156,12 +168,21 @@ for y in range(15):
             wall_list.add(my_wall)
             all_sprites.add(my_wall)
 
+
 for y in range(15):
     for x in range(15):
-        if map[x][y] == 0:
-            my_coin = Coin(YELLOW, 15, 15, x*20, y*20)
-            coin_list.add(my_coin)
-            all_sprites.add(my_coin)
+        if map[x][y] == 2:
+            my_ghost = Block(GREEN ,15 , 15 , x*20 , y*20)
+            ghost_list.add(my_ghost)
+            all_sprites.add(my_ghost)
+
+
+# for y in range(15):
+#     for x in range(15):
+#         if map[x][y] == 0:
+#             my_coin = Coin(YELLOW, 15, 15, x*20, y*20)
+#             coin_list.add(my_coin)
+#             all_sprites.add(my_coin)
 
 for _ in range(1):
     pacman = Pacman(3, 20, 30)
