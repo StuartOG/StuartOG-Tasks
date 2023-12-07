@@ -31,8 +31,8 @@ class Pacman(pygame.sprite.Sprite):
         super().__init__()
         self.lives = lives
         self.speed = 1
-        self.width = 10
-        self.height = 10
+        self.width = 15
+        self.height = 15
         self.image = pygame.Surface([self.width, self.height])
         self.image.fill(PINK), 
         self.rect = self.image.get_rect()
