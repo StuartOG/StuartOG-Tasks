@@ -4,4 +4,12 @@ def binarySearch(aList, itemSought):
     first = 0
     last = len(aList)-1
     while first <= last and found == False:
-        pass
+        midpoint = (first + last) / 2
+        if aList[midpoint] == itemSought:
+            found = True
+            return midpoint
+        else:
+            if aList[midpoint] < itemSought:
+                first = midpoint + 1
+            else:
+                last = midpoint - 1
