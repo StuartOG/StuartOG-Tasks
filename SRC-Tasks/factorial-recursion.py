@@ -36,7 +36,7 @@ fibdict = []
 
 
 def fib(n):
-    if n <= len(fibdict):
+    if n in fibdict:
         return fibdict[n]
     else:
         solution = fib(n-1) + fib(n-2)
@@ -44,4 +44,4 @@ def fib(n):
     #end if
 #end function
 
-print(fib(10))
+print(fib(1))
