@@ -1,26 +1,38 @@
-list = ["A", "F", "G", "B", "E", "C", "H", "D"]
 
-
-def arrSwap(a, b, arr):
-    temp = arr[b]
-    arr[b] = arr[a]
-    arr[a] = temp
-
-
-def quickPass(list):
-    pivot = len(list)
-    ptr = 0
+def arrSwap(arr,a,b):
+    temp = arr[a]
+    arr[a] = arr[b]
+    arr[b] = temp 
+#end procedure
+    
+def quickSplit(arr,ptr,pivot):
     direction = 1
     while ptr != pivot:
-        if ((direction ==  1 and list[ptr] > list[pivot]) or 
-            (direction == -1 and list[ptr] < list[pivot])):
-            arrSwap(ptr, pivot, list)
-            pivot, ptr = ptr, pivot
-            direction = direction *-1
+        if ((direction ==  1 and arr[ptr] > arr[pivot]) or
+            (direction == -1 and arr[ptr] < arr[pivot])):
+            arrSwap(arr, ptr, pivot)   #swap values                     
+            temp = ptr #swap pointers
+            ptr = pivot
+            pivot = temp
+            direction = direction * -1 #change direction
         #end if
         ptr += direction
     #end while
     return pivot
 #end function
-
-quickPass(list)
+        
+def quickSort(arr,left,right):
+    if left >= right: 
+        pass #base case reached
+    else:
+        pivotPos = quickSplit(arr,left,right)  
+        quickSort(arr,left,pivotPos-1)
+        quickSort(arr,pivotPos+1,right)
+    #end if
+#end procedure
+                    
+# data = ['A','F','G','B','E','C','H','D']
+data = [1,12,10,3,5,2,9,7]
+print(data)
+quickSort(data,0,len(data)-1)
+print(data)
